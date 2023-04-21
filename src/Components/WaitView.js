@@ -5,7 +5,7 @@ import '../App.css';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 
-function FavoriteView(){
+function WaitView(){
     const API_URL = 'https://api.themoviedb.org/3'
     const API_KEY = '459fd228326f5c767bf19d219e4acf26'
     const URL_IMAGE = 'https://image.tmdb.org/t/p/original'
@@ -49,4 +49,4 @@ function FavoriteView(){
 }
 
 
-export {FavoriteView};
+export {WaitView};

@@ -64,6 +64,18 @@ function BlogPost(){
         }
     };
 
+    const addWait = async(name, description) => {
+        try{
+            const docRef = await addDoc(collection(db,"Wait"),{
+                name: name,
+                description: description
+            });
+            console.log("document written with id", docRef.id);
+        }catch(e){
+            console.error("Error abriendo el documento", e);
+        }
+    };
+
     return (
         <div>
             <br></br>
@@ -78,6 +90,7 @@ function BlogPost(){
                         <img src={`${URL_IMAGE + movie.poster_path}`} alt="" height= "90%" width="100%" />
                         <h4 className='text-center'>{movie.title}</h4> 
                         <button class="btn_fav" onClick={() => addFavorite(movie.title, movie.id)}>Add Favorite</button>
+                        <button class="btn_espera" onClick={() => addWait(movie.title, movie.id)}>Add Lista de espera</button>
                         </div>
                     ))}
                 </div>

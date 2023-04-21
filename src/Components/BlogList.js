@@ -32,9 +32,22 @@ function BlogList(){
         fetchMovies();
     })
 
-    const addFavorite = async(name, description) => {
+    const addFavorite = async(id, title, poster_path) => {
         try{
             const docRef = await addDoc(collection(db,"Favorites"),{
+                id: id,
+                title: title,
+                poster_path: poster_path
+            });
+            console.log("document written with id", docRef.id);
+        }catch(e){
+            console.error("Error abriendo el documento", e);
+        }
+    };
+
+    const addWait = async(name, description) => {
+        try{
+            const docRef = await addDoc(collection(db,"Wait"),{
                 name: name,
                 description: description
             });
@@ -52,7 +65,8 @@ function BlogList(){
                         <div key={movie.id} className="col-md-4 mb-3">
                         <img src={`${URL_IMAGE + movie.poster_path}`} alt="" height= "90%" width="100%" />
                         <h4 className='text-center'>{movie.title}</h4>
-                        <button class="btn_fav" onClick={() => addFavorite(movie.title, movie.id)}>Add Favorite</button>
+                        <button class="btn_fav" onClick={() => addFavorite(movie.id, movie.title, movie.poster_path)}>Add Favorite</button>
+                        <button class="btn_espera" onClick={() => addWait(movie.title, movie.id)}>Add Lista de espera</button>
                         </div>
                     ))}
                 </div>
