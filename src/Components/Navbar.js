@@ -13,6 +13,7 @@ function Navbar(){
             <nav ref={navRef}>
                 <a href="/BlogPost">BLOG POST</a>
                 <a href="/BlogList">BLOG LIST</a>
+                <a href="/FavoriteView">FAVORITES</a>
                 <button className="nb ncb" onClick={showNavBar}>
                     <FaTimes/>
                 </button>
