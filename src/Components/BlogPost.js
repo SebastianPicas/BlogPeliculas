@@ -89,11 +89,12 @@ function BlogPost(){
                 <div className="row">
                     {Movies.map((movie)=>(
                         <div key={movie.id} className="col-md-4 mb-3">
-                        <img src={`${URL_IMAGE + movie.poster_path}`} alt="" height= "90%" width="100%" />
-                        <h4 className='text-center'>{movie.title}</h4> 
-                        <button class="btn_fav" onClick={() => addFavorite(movie.title, movie.id)}>Add Favorite</button>
-                        <button class="btn_fav" onClick={() => addFavorite(movie.id, movie.title, movie.poster_path)}>Add Favorite</button>
-                        <button class="btn_espera" onClick={() => addWait(movie.id, movie.title, movie.poster_path)}>Add Lista de espera</button>
+                            <img src={`${URL_IMAGE + movie.poster_path}`} alt="" height= "90%" width="100%" />
+                            <h4 className='text-center'>{movie.title}</h4>
+                            <div className="buttons">
+                                <button className="btn_fav" onClick={() => addFavorite(movie.id, movie.title, movie.poster_path)}>Add Favorite</button>
+                                <button className="btn_wait" onClick={() => addWait(movie.id, movie.title, movie.poster_path)}>Add Watchlist</button>
+                            </div>
                         </div>
                     ))}
                 </div>

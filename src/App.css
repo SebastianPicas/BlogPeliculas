@@ -47,6 +47,25 @@ header .nb{
   font-size: 1.5rem;
 }
 
+.buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_fav, .btn_wait{
+  border: none;
+  border-radius: 7.5px;
+  color: white;
+  background-color: var(--mainColor);
+  width: 25%;
+}
+.btn_fav:hover, .btn_wait:hover{
+  color: var(--mainColor);
+  background-color: var(--secondaryColor);
+  border-color: var(--mainColorLight);
+}
+
 @media only screen and (max-width: 1024px) {
   header .nb{
     visibility: visible;
