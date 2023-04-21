@@ -52,11 +52,12 @@ function BlogPost(){
         fetchMovies();
     })
 
-    const addFavorite = async(name, description) => {
+    const addFavorite = async(id, title, poster_path) => {
         try{
             const docRef = await addDoc(collection(db,"Favorites"),{
-                name: name,
-                description: description
+                id: id,
+                title: title,
+                poster_path: poster_path
             });
             console.log("document written with id", docRef.id);
         }catch(e){
@@ -64,11 +65,12 @@ function BlogPost(){
         }
     };
 
-    const addWait = async(name, description) => {
+    const addWait = async(id, title, poster_path) => {
         try{
-            const docRef = await addDoc(collection(db,"Wait"),{
-                name: name,
-                description: description
+            const docRef = await addDoc(collection(db,"Por ver"),{
+                id: id,
+                title: title,
+                poster_path: poster_path
             });
             console.log("document written with id", docRef.id);
         }catch(e){
@@ -90,7 +92,8 @@ function BlogPost(){
                         <img src={`${URL_IMAGE + movie.poster_path}`} alt="" height= "90%" width="100%" />
                         <h4 className='text-center'>{movie.title}</h4> 
                         <button class="btn_fav" onClick={() => addFavorite(movie.title, movie.id)}>Add Favorite</button>
-                        <button class="btn_espera" onClick={() => addWait(movie.title, movie.id)}>Add Lista de espera</button>
+                        <button class="btn_fav" onClick={() => addFavorite(movie.id, movie.title, movie.poster_path)}>Add Favorite</button>
+                        <button class="btn_espera" onClick={() => addWait(movie.id, movie.title, movie.poster_path)}>Add Lista de espera</button>
                         </div>
                     ))}
                 </div>
