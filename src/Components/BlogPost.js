@@ -5,14 +5,13 @@ import '../App.css';
 function BlogPost(){
     const API_URL = 'https://api.themoviedb.org/3'
     const API_KEY = '459fd228326f5c767bf19d219e4acf26'
-    const IMG_PATH = 'https://image.tmdb.org/t/p/original'
     const URL_IMAGE = 'https://image.tmdb.org/t/p/original'
 
     const[Movies, setMovies] = useState([])
     const[searchKey, setSearchKey] = useState("")
-    const[Movie, setMovie] = useState({ title: "Loading Movie"})
+    const[, setMovie] = useState({ title: "Loading Movie"})
 
-    const fetchMovies = async(searcheKey) => {
+    const fetchMovies = async() => {
         const type = searchKey ? "search" : "discover"
         const {data: {results},
         } = await axios.get(`${API_URL}/${type}/movie`, {
@@ -46,11 +45,6 @@ function BlogPost(){
         fetchMovies(searchKey)
     }
           
-    const selectiveMovies = (e)=>{
-        fetch.Movie(Movie.id)
-        setMovie(Movie)
-        window.schrollTo(0,0)
-    }
     
     useEffect(()=>{
         fetchMovies();
