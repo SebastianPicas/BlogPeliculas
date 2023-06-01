@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+EL proyecto cuenta con conexión al firebase, pero no funciona correctamente porque la base de datos caduco su prueba hace unas horas, ya se contacto a soporte para solucionar, pero igual se puede ver correctamente en el codigo que la conexión se realizo correctamente.
 
 ## Available Scripts
 
