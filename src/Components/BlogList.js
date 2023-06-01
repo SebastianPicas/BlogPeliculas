@@ -1,9 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import '../App.css';
 
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, getDoc, query, orderBy, limit } from "firebase/firestore";
 import { db } from '../Firebase';
+
+import { context } from './Context';
+
+const getFromFirebaseTop  = async (title, resultlimit = null) => {
+    try {
+        let ref = collection(db, title);
+
+        let finalQuerry = query(ref,orderBy('createdAt', 'desc'));
+
+        if(resultlimit){
+            finalQuerry = query(finalQuerry,limit(resultlimit));
+        }
+
+        const querySnapshot = await getDocs(finalQuerry);
+        const results = [];
+        querySnapshot.forEach((doc) => {
+            results.push({id:doc.id, data: doc.data()});
+        });
+        return results;
+    } catch (e){
+        console.error("Error getting documents: ", e);
+        return [];
+    }
+};
+getFromFirebaseTop();
 
 function BlogList(){
     const API_URL = 'https://api.themoviedb.org/3'
@@ -32,6 +57,7 @@ function BlogList(){
         fetchMovies();
     })
 
+
     const addFavorite = async(id, title, poster_path) => {
         try{
             const docRef = await addDoc(collection(db,"Favorites"),{
@@ -57,10 +83,17 @@ function BlogList(){
             console.error("Error abriendo el documento", e);
         }
     };
-
+    
+    const topFive = useContext(context);
+    
     return (
         <div>
             <div className='container mt-3'>
+                {topFive[0].map(items => (
+                  <li className="text-center" key = {items.id}>
+                    {items.data.title}
+                  </li>
+                ))}
                 <div className="row">
                     {Movies.map((movie)=>(
                         <div key={movie.id} className="col-md-4 mb-3">
@@ -79,4 +112,4 @@ function BlogList(){
 }
 
 
-export {BlogList};
+export {BlogList, getFromFirebaseTop};
